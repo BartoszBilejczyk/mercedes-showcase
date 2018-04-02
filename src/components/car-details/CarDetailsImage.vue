@@ -1,12 +1,12 @@
 <template>
   <div>
-
+    Car Details Image
   </div>
 </template>
 
 <script>
   export default {
-    name: 'car configration main'
+    name: 'Car-Details-Image'
   }
 </script>
 

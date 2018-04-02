@@ -1,12 +1,12 @@
 <template>
   <div>
-Car container
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'car configration main'
+    name: 'Car'
   }
 </script>
 

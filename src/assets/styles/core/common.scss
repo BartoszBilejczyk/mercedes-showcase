@@ -1,0 +1,45 @@
+.airbnb {
+  &-button {
+    background-color: pal(brand, pink) !important;
+
+    &--block {
+      width: 100%;
+    }
+  }
+
+  &-error {
+    color: pal(brand, pink);
+    padding: 10px 0;
+  }
+}
+
+.fullpage {
+  min-height: calc(100vh - 150px);
+}
+
+@media only screen and (min-width: 1904px) {
+  .container {
+      max-width: 1350px !important;
+  }
+  .container.fluid {
+      max-width: 100% !important;
+  }
+}
+
+.loader {
+  animation: loader 1s infinite;
+  display: flex;
+}
+
+@keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.img-responsive {
+  max-width: 100%;
+}

@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'car configration main'
+    name: 'car-configration'
   }
 </script>
 

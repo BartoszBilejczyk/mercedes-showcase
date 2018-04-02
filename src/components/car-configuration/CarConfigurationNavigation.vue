@@ -1,12 +1,12 @@
 <template>
   <div>
-car configuration navigation
+    car configuration navigation
   </div>
 </template>
 
 <script>
   export default {
-    name: 'car configration main'
+    name: 'car-configration-navigation'
   }
 </script>
 

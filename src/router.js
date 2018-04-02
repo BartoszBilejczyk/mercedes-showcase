@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import ShowcaseContainer from './views/ShowcaseContainer.vue'
 import CarContainer from './views/CarContainer.vue'
+import CarMainPage from './views/CarMainPage.vue'
 import CarDetailsContainer from './views/CarDetailsContainer.vue'
 import CarConfigurationContainer from './views/CarConfigurationContainer.vue'
 import TestDriveContactContainer from './views/TestDriveContactContainer.vue'
@@ -22,10 +23,16 @@ export default new Router({
       component: ShowcaseContainer
     },
     {
-      path: '/car/:name',
+      path: '/car/:model',
       name: 'car',
       component: CarContainer,
+      redirect: '/car/:model/home',
       children: [
+        {
+          path: 'home',
+          name: 'car-main',
+          component: CarMainPage
+        },
         {
           path: 'details',
           name: 'car-details',

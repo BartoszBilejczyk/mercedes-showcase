@@ -1,12 +1,12 @@
 <template>
   <div>
-
+    Test drive confirmation
   </div>
 </template>
 
 <script>
   export default {
-    name: 'car configration main'
+    name: 'Test-Drive-Confirmation'
   }
 </script>
 

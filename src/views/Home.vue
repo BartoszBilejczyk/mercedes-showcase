@@ -1,14 +1,20 @@
 <template>
     <!--<Preloader></Preloader>-->
     <div class="home">
+      <AppHeader></AppHeader>
       <router-link to="showcase">Showcase</router-link>
     </div>
 </template>
 
 <script>
-export default {
-  name: 'home'
-}
+  import AppHeader from '../components/AppHeader.vue'
+
+  export default {
+    name: 'home',
+    components: {
+      AppHeader
+    }
+  }
 </script>
 
 <style lang="scss" scoped>
