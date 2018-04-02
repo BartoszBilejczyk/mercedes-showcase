@@ -3,7 +3,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+import Transitions from 'vue2-transitions'
+Vue.use(Transitions);
 
 new Vue({
   router,

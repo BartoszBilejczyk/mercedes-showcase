@@ -1,9 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import About from './views/About.vue'
+import ShowcaseContainer from './views/ShowcaseContainer.vue'
+import CarContainer from './views/CarContainer.vue'
+import CarDetailsContainer from './views/CarDetailsContainer.vue'
+import CarConfigurationContainer from './views/CarConfigurationContainer.vue'
+import TestDriveContactContainer from './views/TestDriveContactContainer.vue'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
@@ -13,9 +17,31 @@ export default new Router({
       component: Home
     },
     {
-      path: '/about',
-      name: 'about',
-      component: About
+      path: '/showcase',
+      name: 'showcase',
+      component: ShowcaseContainer
+    },
+    {
+      path: '/car/:name',
+      name: 'car',
+      component: CarContainer,
+      children: [
+        {
+          path: 'details',
+          name: 'car-details',
+          component: CarDetailsContainer
+        },
+        {
+          path: 'configuration',
+          name: 'car-configuration',
+          component: CarConfigurationContainer
+        }
+      ]
+    },
+    {
+      path: '/test-drive',
+      name: 'test-drive',
+      component: TestDriveContactContainer
     }
   ]
 })
