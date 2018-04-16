@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="row no-gutters">
     <CarDetailsImage></CarDetailsImage>
     <CarDetailsMainInfo></CarDetailsMainInfo>
   </div>

@@ -32,6 +32,7 @@ $xxl-breakpoint: 2500px;
   width: 90%;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
 
   @media only screen and (min-width: $sm-breakpoint) {
     width: 85%;
@@ -70,6 +71,7 @@ $xxl-breakpoint: 2500px;
   > [class*="col-"] {
     padding-right: 0;
     padding-left: 0;
+    margin: 0;
   }
 }
 
@@ -133,6 +135,11 @@ $xxl-breakpoint: 2500px;
 
 .flex-last {
   order: 1;
+}
+
+.fullheight {
+  height: 100vh;
+  max-height: 100vh;
 }
 
 

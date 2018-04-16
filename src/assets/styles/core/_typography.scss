@@ -8,53 +8,91 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   @include font(14);
+  margin: 10px 0;
 }
 
-.ted-heading {
+
+.heading {
   @include font-weight(bold);
-  color: #000;
+  color: pal(white);
 
   &--hero {
-    @include font-size(33);
+    @include font-size(40);
     line-height: 1.27;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
     margin: 30px 0;
+
+    @include sm-up {
+      @include font-size(50);
+    }
 
     @include md-up {
       @include font-size(60);
     }
+
+    @include lg-up {
+      @include font-size(70);
+    }
   }
 
   &--primary {
-    @include font-size(20);
+    @include font-size(50);
     line-height: 1.20;
   }
 
   &--secondary {
-    @include font-size(13);
-    text-transform: uppercase;
+    @include font-size(20);
   }
 }
 
-.ted-copy {
-  @include font(14);
-  color: #818BA2;
+.copy {
+  @include font-weight(normal);
+  @include font(16);
+  color: pal(gray, x-light);
   line-height: 1.5;
+  margin: 10px 0;
+
+  &--dark {
+    color: pal(gray, mid-dark);
+  }
 
   &--large {
-    @include font(16, bold);
-    color: #000;
+    @include font(18, bold);
+  }
+
+  &--x-large {
+    @include font(22, bold);
   }
 
   &--faded {
     opacity: 0.6;
   }
+
+  &--small {
+    @include font-size(14);
+  }
 }
 
-.ted-red {
-  color: $red;
+.red {
+  color: pal(red);
 }
 
-.ted-white {
-  color: white;
+.black {
+  color: pal(black) !important;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.semi {
+  @include font-weight(semi)
+}
+
+.bold {
+  @include font-weight(bold)
+}
+
+.text-center {
+  text-align: center;
 }

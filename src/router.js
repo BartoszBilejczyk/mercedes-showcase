@@ -20,17 +20,20 @@ export default new Router({
     {
       path: '/showcase',
       name: 'showcase',
-      component: ShowcaseContainer
+      component: ShowcaseContainer,
+      props: true
     },
     {
-      path: '/car/:model',
+      path: '/car/:classId',
       name: 'car',
       component: CarContainer,
-      redirect: '/car/:model/home',
+      props: true,
+      redirect: '/car/:classId/home',
       children: [
         {
           path: 'home',
           name: 'car-main',
+          props: true,
           component: CarMainPage
         },
         {
