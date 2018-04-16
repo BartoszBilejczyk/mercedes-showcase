@@ -10,7 +10,7 @@ $fonts: (
 @mixin font-face($font-name) {
   @font-face {
     font-family: $font-name;
-    src: url('../assets/fonts/#{$font-name}.otf') format('opentype');
+    src: url('/assets/fonts/#{$font-name}.otf') format('opentype');
   }
 }
 
