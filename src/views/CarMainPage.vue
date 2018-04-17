@@ -1,6 +1,7 @@
 <template>
   <div class="car" :style="backgroundImageObject">
     <div class="container fullheight">
+      <AppHeader></AppHeader>
       <div class="car-header">
         <h1 class="heading heading--hero">{{ getActiveModel.name }} </h1>
         <p class="copy copy--x-large">
@@ -43,6 +44,7 @@
 
 <script>
   import {mapGetters} from 'vuex'
+  import AppHeader from '../components/AppHeader.vue'
 
   export default {
     name: 'Car main page',
@@ -60,6 +62,9 @@
       this.$store.dispatch('setCurrentModel', {
         classId: this.$route.params.classId
       });
+    },
+    components: {
+      AppHeader
     }
   }
 </script>

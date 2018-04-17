@@ -81,16 +81,20 @@ p {
   color: pal(black) !important;
 }
 
+.light {
+  color: pal(white, x-light);
+}
+
 .uppercase {
   text-transform: uppercase;
 }
 
 .semi {
-  @include font-weight(semi)
+  @include font-weight(semi);
 }
 
 .bold {
-  @include font-weight(bold)
+  @include font-weight(bold);
 }
 
 .text-center {

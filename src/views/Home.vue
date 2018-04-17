@@ -1,6 +1,8 @@
 <template>
-    <!--<Preloader></Preloader>-->
-    <div class="home">
+    <div v-if="getLoading">
+      <Preloader></Preloader>
+    </div>
+    <div v-else class="home">
       <AppHeader></AppHeader>
       <div class="hero">
         <h1 class="heading heading--hero">Explore <br> the Mercedes-Benz</h1>
@@ -13,11 +15,41 @@
 
 <script>
   import AppHeader from '../components/AppHeader.vue'
+  import Preloader from '../components/Preloader.vue'
+  import {mapGetters, mapActions} from 'vuex'
+  import store from '../store'
 
   export default {
     name: 'home',
+    beforeRouteEnter (to, from, next) {
+      next(vm => vm.setData())
+    },
+    // when route changes and this component is already rendered,
+    // the logic will be slightly different.
+    beforeRouteUpdate (to, from, next) {
+      this.setData();
+      next()
+    },
+    computed: {
+      ...mapGetters([
+        `getData`,
+        'getLoading'
+      ]),
+    },
+    methods: {
+      ...mapActions([
+        `setData`
+      ]),
+      setData() {
+        if (!this.getData.length) {
+          console.log('a')
+          this.$store.dispatch('setData');
+        }
+      }
+    },
     components: {
-      AppHeader
+      AppHeader,
+      Preloader
     }
   }
 </script>

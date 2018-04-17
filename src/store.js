@@ -12,12 +12,14 @@ export default new Vuex.Store({
     apiKey: 'b1435ba6-8cd3-4186-9ab9-871dd4e7ee1e',
     classes: [],
     activeModel: {},
-    loading: true
+    loading: true,
+    loadingStatus: 0
   },
   getters: {
     getData: state => state.classes,
     getActiveModel: state => state.activeModel,
-    getLoading: state => state.loading
+    getLoading: state => state.loading,
+    getLoadingStatus: state => state.loadingStatus
   },
   mutations: {
     SET_DATA(state, data) {
@@ -46,6 +48,12 @@ export default new Vuex.Store({
     },
     SET_LOADING(state, data) {
       state.loading = data;
+    },
+    RESET_LOADER(state) {
+      state.loadingStatus = 0;
+    },
+    LOADER_COUNTER(state) {
+      state.loadingStatus += 1/13
     }
   },
   actions: {
@@ -62,6 +70,7 @@ export default new Vuex.Store({
         classesResponse = await axios.get(`http://localhost:9090/https://api.mercedes-benz.com/configurator/v1/markets/pl_PL/classes?apikey=b1435ba6-8cd3-4186-9ab9-871dd4e7ee1e`)
 
         commit('SET_DATA', classesResponse.data);
+        commit('LOADER_COUNTER')
 
       } catch (ex) {
         return
@@ -75,6 +84,7 @@ export default new Vuex.Store({
             index: i,
             data: modelsResponse.data
           })
+          commit('LOADER_COUNTER')
 
         } catch (ex) {
           return
@@ -86,6 +96,8 @@ export default new Vuex.Store({
             index: i,
             data: configurationsResponse.data
           })
+          commit('LOADER_COUNTER')
+
         } catch (ex) {
             return
         }
@@ -100,6 +112,8 @@ export default new Vuex.Store({
               exteriorImage: photoResponse.data.vehicle.EXT020.url
             }
           })
+          commit('LOADER_COUNTER')
+
 
         } catch (ex) {
             return
@@ -119,42 +133,6 @@ export default new Vuex.Store({
 
       commit('SET_CURRENT_MODEL', currentClass.models[0])
     },
-
-    // async setModel({commit}, data) {
-    //   let classResponse;
-    //   let configurationsResponse;
-    //   let imagesResponse;
-    //
-    //   try {
-    //     classResponse = await axios.get(`http://localhost:9090/https://api.mercedes-benz.com/configurator/v1/markets/pl_PL/models?classId=${data.classId}&apikey=b1435ba6-8cd3-4186-9ab9-871dd4e7ee1e`)
-    //
-    //     commit('SET_MODEL', classResponse.data[0]);
-    //
-    //   } catch (ex) {
-    //     return
-    //   }
-    //
-    //   try {
-    //     configurationsResponse = await axios.get(`http://localhost:9090/${classResponse.data[0]._links.configurations}`)
-    //
-    //     commit('SET_MODEL_DETAILS', configurationsResponse.data);
-    //
-    //   } catch (ex) {
-    //     return
-    //   }
-    //
-    //   try {
-    //     imagesResponse = await axios.get(`http://localhost:9090/${configurationsResponse.data._links.image}`)
-    //
-    //     commit('SET_MODEL_IMAGE', {
-    //       interiorImage: imagesResponse.data.vehicle.INT1.url,
-    //       exteriorImage: imagesResponse.data.vehicle.EXT020.url
-    //     })
-    //   } catch (ex) {
-    //     return
-    //   }
-    //
-    // },
 
     setLoading: ({commit}, data) => {
       commit('SET_LOADING', data)

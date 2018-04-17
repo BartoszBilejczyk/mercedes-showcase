@@ -77,7 +77,7 @@
     position: fixed;
     width: 50%;
     background: #fff;
-    padding-top: 30px;
+    padding: 30px 0;
     top: 0;
     left: 50%;
     margin: 0;
