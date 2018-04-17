@@ -52,12 +52,12 @@
       ]),
       backgroundImageObject() {
         return {
-          backgroundImage: 'linear-gradient(90deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.80) 40%, rgba(0,0,0,0.20) 60%, rgba(0,0,0,0.90) 95%, #000000 100%), url(' + this.getActiveModel.exteriorImage + ')'
+          backgroundImage: 'linear-gradient(90deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.80) 40%, rgba(0,0,0,0.20) 60%, rgba(0,0,0,0.90) 95%, #000000 100%), url(' + this.getActiveModel.configurations.images.exteriorImage + ')'
         }
       }
     },
     beforeCreate() {
-      this.$store.dispatch('setModel', {
+      this.$store.dispatch('setCurrentModel', {
         classId: this.$route.params.classId
       });
     }
