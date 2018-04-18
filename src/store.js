@@ -28,8 +28,8 @@ export default new Vuex.Store({
     SET_MODELS(state, { index, data }) {
       state.classes[index].models = data
     },
-    SET_MODEL_CONFIGURATIONS(state, {index, data}) {
-      state.classes[index].models[0].configurations = data
+    SET_MODEL_CONFIGURATIONS(state, {modelIndex, configIndex, data}) {
+      state.classes[modelIndex].models[configIndex].configurations = data
     },
     SET_DATA_IMAGES(state, { index, data }) {
       state.classes[index].classImage = data.EXT020.url;
@@ -81,37 +81,45 @@ export default new Vuex.Store({
             data: modelsResponse.data
           });
           commit('LOADER_COUNTER')
+          console.log(modelsResponse)
 
         } catch (ex) {
+          console.log('error on models')
           return
         }
-        try {
-          configurationsResponse = await axios.get(`http://localhost:9090/${modelsResponse.data[0]._links.configurations}`);
 
-          commit('SET_MODEL_CONFIGURATIONS', {
-            index: i,
-            data: configurationsResponse.data
-          });
-          commit('LOADER_COUNTER')
+        for (let j = 0; j < modelsResponse.data.length; j++) {
+          try {
+            configurationsResponse = await axios.get(`http://localhost:9090/${modelsResponse.data[j]._links.configurations}`);
 
-        } catch (ex) {
+            commit('SET_MODEL_CONFIGURATIONS', {
+              modelIndex: i,
+              configIndex: j,
+              data: configurationsResponse.data
+            });
+            commit('LOADER_COUNTER')
+
+          } catch (ex) {
+            console.log('error on configs')
             return
+          }
         }
+      }
 
-        try {
-          const configurationsResponseWithoutKey = configurationsResponse.data._links.image.replace('apikey=b1435ba6-8cd3-4186-9ab9-871dd4e7ee1e', '');
-          photoResponse = await axios.get(`http://localhost:9090/${configurationsResponseWithoutKey}perspectives=EXT000,EXT010,EXT020,EXT040,EXT060,EXT080,EXT100,EXT120,EXT140,EXT160,EXT180,EXT200,EXT220,EXT240,EXT260,EXT280,EXT300,EXT320,EXT340,INT1,INT2,INT3,INT4&apikey=${environment.apiKey}`);
-          commit('SET_DATA_IMAGES', {
-            index: i,
-            data: photoResponse.data.vehicle
-          });
-          console.log(photoResponse)
-          commit('LOADER_COUNTER')
+      try {
+        const configurationsResponseWithoutKey = configurationsResponse.data._links.image.replace('apikey=b1435ba6-8cd3-4186-9ab9-871dd4e7ee1e', '');
+        photoResponse = await axios.get(`http://localhost:9090/${configurationsResponseWithoutKey}perspectives=EXT000,EXT010,EXT020,EXT040,EXT060,EXT080,EXT100,EXT120,EXT140,EXT160,EXT180,EXT200,EXT220,EXT240,EXT260,EXT280,EXT300,EXT320,EXT340,INT1,INT2,INT3,INT4&apikey=${environment.apiKey}`);
+        commit('SET_DATA_IMAGES', {
+          index: i,
+          data: photoResponse.data.vehicle
+        });
+        console.log(photoResponse)
+        commit('LOADER_COUNTER')
 
 
-        } catch (ex) {
-            return
-        }
+      } catch (ex) {
+        console.log('error on images')
+        return
       }
 
       commit('SET_LOADING', false)
