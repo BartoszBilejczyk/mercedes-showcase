@@ -75,9 +75,9 @@
 
   .car {
     /*background: linear-gradient(90deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.80) 40%, rgba(0,0,0,0.20) 60%, rgba(0,0,0,0.90) 95%, #000000 100%), url('../assets/images/mercedes-amg-gtr.jpg');*/
-    background-position: left 50%;
+    background-position: 15% 50%;
     background-repeat: no-repeat;
-    background-size: 120%;
+    background-size: 140%;
 
     > .container {
       position: relative;

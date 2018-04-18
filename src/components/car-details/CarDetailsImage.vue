@@ -1,7 +1,8 @@
 <template>
   <transition name="slide-fade" appear mode="out-in">
     <div class="detail-images" >
-      <div class="detail-images__item" :style="{'backgroundImage': 'url(' + getActiveModel.images.EXT000.url + ')'}"></div>
+      <div class="detail-images__item detail-images__item--closer" :style="{'backgroundImage': 'url(' + getActiveModel.images.EXT040.url + ')'}"></div>
+      <div class="detail-images__item detail-images__item--x-closer" :style="{'backgroundImage': 'url(' + getActiveModel.images.EXT200.url + ')'}"></div>
       <div class="detail-images__item" :style="{'backgroundImage': 'url(' + getActiveModel.images.INT2.url + ')'}"></div>
     </div>
   </transition>
@@ -30,6 +31,16 @@
       background-repeat: no-repeat;
       background-size: cover;
       height: 100vh;
+
+      &--closer {
+        background-position: 55% center;
+        background-size: 160%;
+      }
+
+      &--x-closer {
+        background-position: 55% center;
+        background-size: 200%;
+      }
     }
   }
 

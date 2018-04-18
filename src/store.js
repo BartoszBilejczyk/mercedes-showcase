@@ -100,7 +100,7 @@ export default new Vuex.Store({
 
         try {
           const configurationsResponseWithoutKey = configurationsResponse.data._links.image.replace('apikey=b1435ba6-8cd3-4186-9ab9-871dd4e7ee1e', '');
-          photoResponse = await axios.get(`http://localhost:9090/${configurationsResponseWithoutKey}perspectives=EXT000,EXT010,EXT020,INT1,INT2,INT3,INT4&apikey=${environment.apiKey}`);
+          photoResponse = await axios.get(`http://localhost:9090/${configurationsResponseWithoutKey}perspectives=EXT000,EXT010,EXT020,EXT040,EXT060,EXT080,EXT100,EXT120,EXT140,EXT160,EXT180,EXT200,EXT220,EXT240,EXT260,EXT280,EXT300,EXT320,EXT340,INT1,INT2,INT3,INT4&apikey=${environment.apiKey}`);
           commit('SET_DATA_IMAGES', {
             index: i,
             data: photoResponse.data.vehicle
