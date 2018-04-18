@@ -10,22 +10,22 @@
           </div>
 
           <div class="main-info">
-            <h1 class="heading heading--primary black">AMG GT-R</h1>
-            <h2 class="heading heading--secondary black">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus omnis porro quos. Animi asperiores eius fugiat illum inventore laborum quisquam, quod. Maxime natus numquam veniam. Itaque optio quas reprehenderit similique!</h2>
+            <h1 class="heading heading--primary black">{{ activeModel.name }}</h1>
+            <h2 class="heading heading--secondary black">If there’s one thing that’s not in short supply at AMG, it’s confidence. Tobias Moers, Mercedes-AMG’s chairman and CEO, told us in no uncertain terms to compare the latest version of the brand’s sports car, the GT R, against the Porsche 911 GT3 RS. “Our car is faster,” he said. And when we asked where, the reply was as abrupt as it was unequivocal: “Everywhere.”</h2>
           </div>
 
           <div class="description-wrapper">
             <div class="container">
               <div class="row description-">
                 <h3 class="title copy copy--large bold black">Fast and furious.</h3>
-                <p class="description copy copy--dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa cum ex, iusto laudantium nam nulla obcaecati qui reiciendis repellendus reprehenderit, similique soluta vitae voluptates. Animi consequuntur ducimus numquam quos sapiente?</p>
+                <p class="description copy copy--dark">Sharpened racetrack performance comes courtesy of the intelligent lightweight construction incorporating aluminium and carbon, specific reinforcements in the body shell, the uprated twin-turbo V-8 engine with the specifically adapted seven-speed dual-clutch transmission, the innovative aerodynamics with active components, and the new suspension with active rear-wheel steering and uniball joints.</p>
               </div>
 
               <div class="divider"></div>
 
               <div class="row description-">
                 <h3 class="title copy copy--large bold black">Modern luxury.</h3>
-                <p class="description copy copy--dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi, consectetur cumque, debitis delectus distinctio ea fuga iste minus nam nemo officiis porro quibusdam sapiente sit ut velit voluptas voluptate?</p>
+                <p class="description copy copy--dark">Mercedes-AMG uses an intelligent material mix for the structure of the AMG GT R: various aluminium alloys for the chassis and body, steel for the boot lid and magnesium for the front deck. A host of further measures contributes to the weight reduction as part of the AMG lightweight-performance strategy. The use of carbon fibre, the lightweight and high-strength material from motorsport, helps to achieve the ambitious goals. </p>
               </div>
             </div>
           </div>
@@ -33,21 +33,64 @@
           <div class="divider"></div>
 
           <div class="measurements">
-            <div class="row align-center justify-around">
-              <div class="col">
-                <p class="copy bold black">Power</p>
-                <div class="divider divider--small"></div>
-                <p class="heading heading--secondary black">450 HP</p>
+            <div class="measurements__item row align-center justify-center">
+              <div class="col col-xs-12 align-center">
+                <p class="heading heading--primary black">Stats</p>
+                <div class="divider divider--medium"></div>
+                <div class="row align-center justify-center heading heading--secondary black">
+                  <div class="col col-xs-3">
+                  <p class="copy bold black">0-100 km/h</p>
+                  <div class="divider divider--small"></div>
+                  <p class="heading heading--secondary black">{{ activeModel.configurations.technicalInformation.acceleration.value }}{{ activeModel.configurations.technicalInformation.acceleration.unit }}</p>
+                </div>
+                  <div class="col col-xs-3">
+                    <p class="copy bold black">Max speed</p>
+                    <div class="divider divider--small"></div>
+                    <p class="heading heading--secondary black">{{ activeModel.configurations.technicalInformation.topSpeed.value }}{{ activeModel.configurations.technicalInformation.topSpeed.unit }}</p>
+                  </div>
+                </div>
               </div>
-              <div class="col">
-                <p class="copy bold black">0-100 km/h</p>
-                <div class="divider divider--small"></div>
-                <p class="heading heading--secondary black">3.5s</p>
+            </div>
+            <div class="measurements__item row align-center justify-center">
+              <div class="col col-xs-12 align-center">
+                <p class="heading heading--primary black">Engine</p>
+                <div class="divider divider--medium"></div>
+                <div class="row align-center justify-between heading heading--secondary black">
+                  <div class="col col-xs-3">
+                    <span>{{ activeModel.configurations.technicalInformation.engine.powerHp.value }}{{ activeModel.configurations.technicalInformation.engine.powerHp.unit }} / {{ activeModel.configurations.technicalInformation.engine.powerKw .value}}{{ activeModel.configurations.technicalInformation.engine.powerKw.unit }}</span>
+                  </div>
+                  <div class="col col-xs-3">
+                    <span>{{ activeModel.configurations.technicalInformation.engine.capacity.value }}{{ activeModel.configurations.technicalInformation.engine.capacity.unit }}</span>
+                  </div>
+                  <div class="col col-xs-3">
+                    <span>{{ activeModel.configurations.technicalInformation.engine.engineTorque.value }}{{ activeModel.configurations.technicalInformation.engine.engineTorque.unit }}</span>
+                  </div>
+                  <div class="col col-xs-3">
+                    <span>{{ activeModel.configurations.technicalInformation.engine.cylinder }} cylinders</span>
+                  </div>
+                </div>
               </div>
-              <div class="col">
-                <p class="copy bold black">Max speed</p>
-                <div class="divider divider--small"></div>
-                <p class="heading heading--secondary black">354 km/h</p>
+            </div>
+
+            <div class="measurements__item row align-center justify-center">
+              <div class="col col-xs-12 align-center">
+                <p class="heading heading--primary black">Fuel Economy</p>
+                <div class="divider divider--medium"></div>
+                <div class="row align-center justify-center black heading heading--secondary">
+                  <div class="col col-xs-5">
+                    <p class="copy copy--dark">City Min</p>
+                    <span>{{ activeModel.configurations.technicalInformation.engine.fuelEconomy.fuelConsumptionCityMin.value }}{{ activeModel.configurations.technicalInformation.engine.fuelEconomy.fuelConsumptionCityMin.unit }}</span>
+                  </div>
+                  <div class="col col-xs-5">
+                    <p class="copy copy--dark">City Max</p>
+                    <span>{{ activeModel.configurations.technicalInformation.engine.fuelEconomy.fuelConsumptionOverlandMax.value }}{{ activeModel.configurations.technicalInformation.engine.fuelEconomy.fuelConsumptionOverlandMax.unit }}</span>                  </div>
+                  <div class="col col-xs-5">
+                    <p class="copy copy--dark">Journey Min</p>
+                    <span>{{ activeModel.configurations.technicalInformation.engine.fuelEconomy.fuelConsumptionOverlandMin.value }}{{ activeModel.configurations.technicalInformation.engine.fuelEconomy.fuelConsumptionOverlandMin.unit }}</span>                  </div>
+                  <div class="col col-xs-5">
+                    <p class="copy copy--dark">Journey Max</p>
+                    <span>{{ activeModel.configurations.technicalInformation.engine.fuelEconomy.fuelConsumptionOverlandMax.value }}{{ activeModel.configurations.technicalInformation.engine.fuelEconomy.fuelConsumptionOverlandMax.unit }}</span>                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -59,7 +102,8 @@
 
 <script>
   export default {
-    name: 'Car-details-main-info'
+    name: 'Car-details-main-info',
+    props: ['activeModel']
   }
 </script>
 
@@ -132,6 +176,12 @@
     height: 3px;
     background: pal(black);
 
+    &--medium {
+      width: 50px;
+      height: 2px;
+      margin: 20px 0;
+    }
+
     &--small {
       width: 25px;
       height: 2px;
@@ -141,6 +191,10 @@
 
   .measurements {
     margin: 140px 0;
+
+    &__item {
+      margin: 100px 0;
+    }
   }
 
 
@@ -166,3 +220,14 @@
   }
 
 </style>
+
+
+configurations initial price
+technicalInformation
+
+acceleration
+dimensions
+engine - powerHp/powerKw engineTourqe capacity cylinder
+top speed
+transmission
+kerbWeight

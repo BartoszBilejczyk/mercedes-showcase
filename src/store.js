@@ -3,13 +3,13 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
+import { environment } from './env/env.js'
 
 Vue.use(Vuex)
 Vue.use(VueAxios, axios);
 
 export default new Vuex.Store({
   state: {
-    apiKey: 'b1435ba6-8cd3-4186-9ab9-871dd4e7ee1e',
     classes: [],
     activeModel: {},
     loading: true,
@@ -32,8 +32,8 @@ export default new Vuex.Store({
       state.classes[index].models[0].configurations = data
     },
     SET_DATA_IMAGES(state, { index, data }) {
-      state.classes[index].classImage = data.exteriorImage;
-      state.classes[index].models[0].configurations.images = data
+      state.classes[index].classImage = data.EXT020.url;
+      state.classes[index].models[0].images = data
     },
     SET_CURRENT_MODEL(state, data) {
       state.activeModel = {};
@@ -41,10 +41,6 @@ export default new Vuex.Store({
     },
     SET_MODEL_DETAILS(state, data) {
       state.activeModel.details = data;
-    },
-    SET_MODEL_IMAGE(state, data) {
-      state.activeModel.exteriorImage = data.exteriorImage;
-      state.activeModel.interiorImage = data.interiorImage;
     },
     SET_LOADING(state, data) {
       state.loading = data;
@@ -67,7 +63,7 @@ export default new Vuex.Store({
       let photoResponse;
 
       try {
-        classesResponse = await axios.get(`http://localhost:9090/https://api.mercedes-benz.com/configurator/v1/markets/pl_PL/classes?apikey=b1435ba6-8cd3-4186-9ab9-871dd4e7ee1e`)
+        classesResponse = await axios.get(`http://localhost:9090/https://api.mercedes-benz.com/configurator/v1/markets/pl_PL/classes?apikey=${environment.apiKey}`)
 
         commit('SET_DATA', classesResponse.data);
         commit('LOADER_COUNTER')
@@ -76,26 +72,26 @@ export default new Vuex.Store({
         return
       }
 
-      for (let i = 0; i <= 3; i++) {
+      for (let i = 0; i <= 1; i++) {
         try {
-          modelsResponse = await axios.get(`http://localhost:9090/${classesResponse.data[i]._links.models}`)
+          modelsResponse = await axios.get(`http://localhost:9090/${classesResponse.data[i]._links.models}`);
 
           commit('SET_MODELS', {
             index: i,
             data: modelsResponse.data
-          })
+          });
           commit('LOADER_COUNTER')
 
         } catch (ex) {
           return
         }
         try {
-          configurationsResponse = await axios.get(`http://localhost:9090/${modelsResponse.data[0]._links.configurations}`)
+          configurationsResponse = await axios.get(`http://localhost:9090/${modelsResponse.data[0]._links.configurations}`);
 
           commit('SET_MODEL_CONFIGURATIONS', {
             index: i,
             data: configurationsResponse.data
-          })
+          });
           commit('LOADER_COUNTER')
 
         } catch (ex) {
@@ -103,15 +99,13 @@ export default new Vuex.Store({
         }
 
         try {
-          photoResponse = await axios.get(`http://localhost:9090/${configurationsResponse.data._links.image}`)
-
+          const configurationsResponseWithoutKey = configurationsResponse.data._links.image.replace('apikey=b1435ba6-8cd3-4186-9ab9-871dd4e7ee1e', '');
+          photoResponse = await axios.get(`http://localhost:9090/${configurationsResponseWithoutKey}perspectives=EXT000,EXT010,EXT020,INT1,INT2,INT3,INT4&apikey=${environment.apiKey}`);
           commit('SET_DATA_IMAGES', {
             index: i,
-            data: {
-              interiorImage: photoResponse.data.vehicle.INT1.url,
-              exteriorImage: photoResponse.data.vehicle.EXT020.url
-            }
-          })
+            data: photoResponse.data.vehicle
+          });
+          console.log(photoResponse)
           commit('LOADER_COUNTER')
 
 

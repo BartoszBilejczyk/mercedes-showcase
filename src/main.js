@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import vuescroll from 'vue-scroll'
 
 import VueCarousel from 'vue-carousel';
 import Transitions from 'vue2-transitions'
@@ -15,6 +16,7 @@ Vue.config.productionTip = false;
 Vue.use(VueCarousel);
 Vue.use(Transitions);
 Vue.use(VueAxios, axios);
+Vue.use(vuescroll);
 
 new Vue({
   router,
