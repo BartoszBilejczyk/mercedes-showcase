@@ -28,8 +28,8 @@ export default new Vuex.Store({
     SET_MODELS(state, { index, data }) {
       state.classes[index].models = data
     },
-    SET_MODEL_CONFIGURATIONS(state, {modelIndex, configIndex, data}) {
-      state.classes[modelIndex].models[configIndex].configurations = data
+    SET_MODEL_CONFIGURATIONS(state, {index, data}) {
+      state.classes[index].models[0].configurations = data
     },
     SET_DATA_IMAGES(state, { index, data }) {
       state.classes[index].classImage = data.EXT020.url;
@@ -63,7 +63,7 @@ export default new Vuex.Store({
       let photoResponse;
 
       try {
-        classesResponse = await axios.get(`http://localhost:9090/https://api.mercedes-benz.com/configurator/v1/markets/pl_PL/classes?apikey=${environment.apiKey}`)
+        classesResponse = await axios.get(`http://localhost:9090/https://api.mercedes-benz.com/configurator/v1/markets/pl_PL/classes?apikey=${environment.apiKey}`);
 
         commit('SET_DATA', classesResponse.data);
         commit('LOADER_COUNTER')
@@ -72,54 +72,45 @@ export default new Vuex.Store({
         return
       }
 
-      for (let i = 0; i <= 1; i++) {
+      for (let i = 0; i < 18; i++) {
         try {
           modelsResponse = await axios.get(`http://localhost:9090/${classesResponse.data[i]._links.models}`);
-
+          console.log(modelsResponse)
           commit('SET_MODELS', {
             index: i,
             data: modelsResponse.data
           });
           commit('LOADER_COUNTER')
-          console.log(modelsResponse)
 
         } catch (ex) {
-          console.log('error on models')
+          console.log('error on models');
           return
         }
 
-        for (let j = 0; j < modelsResponse.data.length; j++) {
-          try {
-            configurationsResponse = await axios.get(`http://localhost:9090/${modelsResponse.data[j]._links.configurations}`);
+        try {
+          configurationsResponse = await axios.get(`http://localhost:9090/${modelsResponse.data[0]._links.configurations}`);
+          console.log(configurationsResponse)
+          commit('SET_MODEL_CONFIGURATIONS', {
+            index: i,
+            data: configurationsResponse.data
+          });
+          commit('LOADER_COUNTER')
 
-            commit('SET_MODEL_CONFIGURATIONS', {
-              modelIndex: i,
-              configIndex: j,
-              data: configurationsResponse.data
-            });
-            commit('LOADER_COUNTER')
-
-          } catch (ex) {
-            console.log('error on configs')
-            return
-          }
+        } catch (ex) {
+          console.log('error on configs');
+          return
         }
-      }
 
-      try {
-        const configurationsResponseWithoutKey = configurationsResponse.data._links.image.replace('apikey=b1435ba6-8cd3-4186-9ab9-871dd4e7ee1e', '');
-        photoResponse = await axios.get(`http://localhost:9090/${configurationsResponseWithoutKey}perspectives=EXT000,EXT010,EXT020,EXT040,EXT060,EXT080,EXT100,EXT120,EXT140,EXT160,EXT180,EXT200,EXT220,EXT240,EXT260,EXT280,EXT300,EXT320,EXT340,INT1,INT2,INT3,INT4&apikey=${environment.apiKey}`);
-        commit('SET_DATA_IMAGES', {
-          index: i,
-          data: photoResponse.data.vehicle
-        });
-        console.log(photoResponse)
-        commit('LOADER_COUNTER')
+        try {
+          photoResponse = await axios.get(`http://localhost:9090/${configurationsResponse.data._links.image}`);
+          commit('SET_DATA_IMAGES', {
+            index: i,
+            data: photoResponse.data.vehicle
+          })
 
-
-      } catch (ex) {
-        console.log('error on images')
-        return
+        } catch (ex) {
+          console.log('error on images');
+        }
       }
 
       commit('SET_LOADING', false)

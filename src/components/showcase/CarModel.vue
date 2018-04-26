@@ -1,8 +1,8 @@
 <template>
   <div class="model-box-wrapper">
     <div class="model-box" :style="{'backgroundImage': 'url(' + image + ')'}">
-      <div class="model-box--tint row align-center justify-center">
-        <p @click="goToModel" class="go-to-model">
+      <div class="model-box--tint row align-center justify-center" @click="goToModel">
+        <p class="go-to-model">
           {{ name }}
         </p>
       </div>

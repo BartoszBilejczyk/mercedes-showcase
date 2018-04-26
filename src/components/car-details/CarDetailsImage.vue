@@ -1,9 +1,9 @@
 <template>
   <transition name="slide-fade" appear mode="out-in">
     <div class="detail-images" >
-      <div class="detail-images__item detail-images__item--closer" :style="{'backgroundImage': 'url(' + getActiveModel.images.EXT040.url + ')'}"></div>
-      <div class="detail-images__item detail-images__item--x-closer" :style="{'backgroundImage': 'url(' + getActiveModel.images.EXT200.url + ')'}"></div>
-      <div class="detail-images__item" :style="{'backgroundImage': 'url(' + getActiveModel.images.INT2.url + ')'}"></div>
+      <div class="detail-images__item detail-images__item--closer" :style="{'backgroundImage': 'url(' + getActiveModel.images.EXT020.url + ')'}"></div>
+      <!--<div class="detail-images__item detail-images__item&#45;&#45;x-closer" :style="{'backgroundImage': 'url(' + getActiveModel.images.EXT200.url + ')'}"></div>-->
+      <div class="detail-images__item" :style="{'backgroundImage': 'url(' + getActiveModel.images.INT1.url + ')'}"></div>
     </div>
   </transition>
 </template>
