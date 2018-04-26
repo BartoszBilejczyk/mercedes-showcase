@@ -6,7 +6,7 @@
           <div class="navigation text-center row justify-around align-center copy copy--small semi uppercase">
             <router-link class="black styled-link styled-link--on-light" :to="{ name: 'car', params: { model: 'mercedes' }}">Close Details</router-link>
             <router-link class="black styled-link styled-link--on-light" to="/test-drive">Arrange Test Drive</router-link>
-            <router-link class="black styled-link styled-link--on-light" :to="{ path: 'configuration' }">Configure Vehicle</router-link>
+            <p class="black styled-link styled-link--on-light" @click="goToConfiguration">Configure Vehicle</p>
           </div>
 
           <div class="main-info">
@@ -103,7 +103,13 @@
 <script>
   export default {
     name: 'Car-details-main-info',
-    props: ['activeModel']
+    props: ['activeModel'],
+    methods: {
+      goToConfiguration() {
+        this.$store.dispatch('setConfigurationEnvironment');
+        this.$router.push(`/car/${this.$route.params.classId}/configuration`)
+      }
+    }
   }
 </script>
 

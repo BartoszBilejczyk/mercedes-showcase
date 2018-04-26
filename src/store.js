@@ -39,8 +39,14 @@ export default new Vuex.Store({
       state.activeModel = {};
       state.activeModel = data;
     },
-    SET_MODEL_DETAILS(state, data) {
-      state.activeModel.details = data;
+    SET_SELECTABLES(state, data) {
+      state.activeModel.selectables = data;
+    },
+    SET_VEHICLE_COMPONENTS_TO_ARRAY(state, data) {
+      state.activeModel.selectables.vehicleComponents = data
+    },
+    SET_VEHICLE_COMPONENT_IMAGE(state, {componentIndex, data}) {
+      state.activeModel.selectables.vehicleComponents[componentIndex].image = data
     },
     SET_LOADING(state, data) {
       state.loading = data;
@@ -119,7 +125,6 @@ export default new Vuex.Store({
 
     async setCurrentModel({commit}, data) {
       let classId = data.classId;
-      console.log(classId)
 
       const currentClass = this.state.classes.find(classItem => classItem.classId === classId)
 
@@ -129,6 +134,39 @@ export default new Vuex.Store({
 
     setLoading: ({commit}, data) => {
       commit('SET_LOADING', data)
+    },
+
+    async setConfigurationEnvironment({commit}) {
+      try {
+        let selectablesResponse = await axios.get(`http://localhost:9090/${this.state.activeModel.configurations._links.selectables}`);
+
+        console.log(selectablesResponse)
+
+        commit('SET_SELECTABLES', selectablesResponse.data)
+
+      } catch (ex) {
+        console.log('error on selectables');
+      }
+
+      commit('SET_VEHICLE_COMPONENTS_TO_ARRAY', Object.values(this.state.activeModel.selectables.vehicleComponents));
+
+      for (let j = 0; j < 30; j++) {
+        if (this.state.activeModel.selectables.vehicleComponents[j].hasOwnProperty('_links')) {
+          try {
+            console.log(`http://localhost:9090/${this.state.activeModel.selectables.vehicleComponents[j]._links.image}`)
+            // let componentResponse = await axios.get(`http://localhost:9090/${this.state.activeModel.selectables.vehicleComponents[j]._links.image}`)
+
+            commit('SET_VEHICLE_COMPONENT_IMAGE', {
+              index: j,
+              data: componentResponse.data
+            })
+
+          } catch (ex) {
+            console.log('error on setting component Image');
+          }
+          console.log(j);
+        }
+      }
     }
   },
   plugins: [createPersistedState()]
