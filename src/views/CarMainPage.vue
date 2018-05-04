@@ -1,6 +1,7 @@
 <template>
   <div class="car" :style="backgroundImageObject">
     <div class="container fullheight">
+      <AppHeader></AppHeader>
       <div class="car-header">
         <h1 class="heading heading--hero">{{ getActiveModel.name }} </h1>
         <p class="copy copy--x-large">
@@ -8,41 +9,13 @@
         </p>
         <router-link class="heading heading--secondary uppercase styled-link" :to="{ name: 'car-details' }">See more</router-link>
       </div>
-
-      <!--<div class="car-images-carousel">-->
-        <!--<carousel loop :per-page="6">-->
-          <!--<slide>-->
-            <!--<img class="thumbnail" src="../assets/images/cars/amg-gt-r/mercedes-amg-gt-r_01.jpg" alt="mercedes-amg-gt-r">-->
-          <!--</slide>-->
-          <!--<slide>-->
-            <!--<img class="thumbnail" src="../assets/images/cars/amg-gt-r/mercedes-amg-gt-r_02.jpg" alt="mercedes-amg-gt-r">-->
-          <!--</slide>-->
-          <!--<slide>-->
-            <!--<img class="thumbnail" src="../assets/images/cars/amg-gt-r/mercedes-amg-gt-r_03.jpg" alt="mercedes-amg-gt-r">-->
-          <!--</slide>-->
-          <!--<slide>-->
-            <!--<img class="thumbnail" src="../assets/images/cars/amg-gt-r/mercedes-amg-gt-r_04.jpg" alt="mercedes-amg-gt-r">-->
-          <!--</slide>-->
-          <!--<slide>-->
-            <!--<img class="thumbnail" src="../assets/images/cars/amg-gt-r/mercedes-amg-gt-r_05.jpg" alt="mercedes-amg-gt-r">-->
-          <!--</slide>-->
-          <!--<slide>-->
-            <!--<img class="thumbnail" src="../assets/images/cars/amg-gt-r/mercedes-amg-gt-r_06.jpg" alt="mercedes-amg-gt-r">-->
-          <!--</slide>-->
-          <!--<slide>-->
-            <!--<img class="thumbnail" src="../assets/images/cars/amg-gt-r/mercedes-amg-gt-r_07.jpg" alt="mercedes-amg-gt-r">-->
-          <!--</slide>-->
-          <!--<slide>-->
-            <!--<img class="thumbnail" src="../assets/images/cars/amg-gt-r/mercedes-amg-gt-r_08.jpg" alt="mercedes-amg-gt-r">-->
-          <!--</slide>-->
-        <!--</carousel>-->
-      <!--</div>-->
     </div>
   </div>
 </template>
 
 <script>
   import {mapGetters} from 'vuex'
+  import AppHeader from '../components/AppHeader.vue'
 
   export default {
     name: 'Car main page',
@@ -52,7 +25,7 @@
       ]),
       backgroundImageObject() {
         return {
-          backgroundImage: 'linear-gradient(90deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.80) 40%, rgba(0,0,0,0.20) 60%, rgba(0,0,0,0.90) 95%, #000000 100%), url(' + this.getActiveModel.configurations.images.exteriorImage + ')'
+          backgroundImage: 'linear-gradient(90deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.80) 40%, rgba(0,0,0,0.20) 60%, rgba(0,0,0,0.90) 95%, #000000 100%), url(' + this.getActiveModel.images.EXT020.url + ')'
         }
       }
     },
@@ -60,6 +33,9 @@
       this.$store.dispatch('setCurrentModel', {
         classId: this.$route.params.classId
       });
+    },
+    components: {
+      AppHeader
     }
   }
 </script>
@@ -70,9 +46,9 @@
 
   .car {
     /*background: linear-gradient(90deg, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.80) 40%, rgba(0,0,0,0.20) 60%, rgba(0,0,0,0.90) 95%, #000000 100%), url('../assets/images/mercedes-amg-gtr.jpg');*/
-    background-position: left 50%;
+    background-position: 15% 50%;
     background-repeat: no-repeat;
-    background-size: 120%;
+    background-size: 140%;
 
     > .container {
       position: relative;

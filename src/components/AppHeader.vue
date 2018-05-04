@@ -1,7 +1,9 @@
 <template>
   <div>
     <header>
-      <img class="brand" src="../assets/images/mercedes-logo.svg" alt="mercedes-logo">
+      <router-link to="/showcase">
+        <img class="brand" src="../assets/images/mercedes-logo.svg" alt="mercedes-logo">
+      </router-link>
     </header>
     <!--<Navigation></Navigation>-->
   </div>

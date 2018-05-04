@@ -1,6 +1,8 @@
 <template>
-    <!--<Preloader></Preloader>-->
-    <div class="home">
+    <div v-if="getLoading">
+      <Preloader></Preloader>
+    </div>
+    <div v-else class="home">
       <AppHeader></AppHeader>
       <div class="hero">
         <h1 class="heading heading--hero">Explore <br> the Mercedes-Benz</h1>
@@ -13,11 +15,34 @@
 
 <script>
   import AppHeader from '../components/AppHeader.vue'
+  import Preloader from '../components/Preloader.vue'
+  import {mapGetters, mapActions} from 'vuex'
+  import store from '../store'
 
   export default {
     name: 'home',
+    computed: {
+      ...mapGetters([
+        `getData`,
+        'getLoading'
+      ]),
+    },
+    methods: {
+      ...mapActions([
+        `setData`
+      ]),
+      setData() {
+        if (!this.getData.length) {
+          this.$store.dispatch('setData');
+        }
+      }
+    },
+    mounted() {
+      this.setData();
+    },
     components: {
-      AppHeader
+      AppHeader,
+      Preloader
     }
   }
 </script>
