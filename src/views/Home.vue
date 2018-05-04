@@ -21,15 +21,6 @@
 
   export default {
     name: 'home',
-//    beforeRouteEnter (to, from, next) {
-//      next(vm => vm.setData())
-//    },
-//    // when route changes and this component is already rendered,
-//    // the logic will be slightly different.
-//    beforeRouteUpdate (to, from, next) {
-//      this.setData();
-//      next()
-//    },
     computed: {
       ...mapGetters([
         `getData`,
@@ -42,7 +33,6 @@
       ]),
       setData() {
         if (!this.getData.length) {
-          console.log('a')
           this.$store.dispatch('setData');
         }
       }

@@ -55,13 +55,13 @@ export default new Vuex.Store({
       state.loadingStatus = 0;
     },
     LOADER_COUNTER(state) {
-      state.loadingStatus += 1/13
+      state.loadingStatus += 1/30
     }
   },
   actions: {
     async setData({commit}) {
 
-      commit('SET_LOADING', true)
+      commit('SET_LOADING', true);
 
       let classesResponse;
       let modelsResponse;
@@ -78,10 +78,10 @@ export default new Vuex.Store({
         return
       }
 
-      for (let i = 0; i < 18; i++) {
+      for (let i = 0; i < 10; i++) {
         try {
           modelsResponse = await axios.get(`http://localhost:9090/${classesResponse.data[i]._links.models}`);
-          console.log(modelsResponse)
+          console.log(modelsResponse);
           commit('SET_MODELS', {
             index: i,
             data: modelsResponse.data
@@ -109,6 +109,7 @@ export default new Vuex.Store({
 
         try {
           photoResponse = await axios.get(`http://localhost:9090/${configurationsResponse.data._links.image}`);
+          console.log(photoResponse)
           commit('SET_DATA_IMAGES', {
             index: i,
             data: photoResponse.data.vehicle

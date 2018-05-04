@@ -9,35 +9,6 @@
         </p>
         <router-link class="heading heading--secondary uppercase styled-link" :to="{ name: 'car-details' }">See more</router-link>
       </div>
-
-      <!--<div class="car-images-carousel">-->
-        <!--<carousel loop :per-page="6">-->
-          <!--<slide>-->
-            <!--<img class="thumbnail" src="../assets/images/cars/amg-gt-r/mercedes-amg-gt-r_01.jpg" alt="mercedes-amg-gt-r">-->
-          <!--</slide>-->
-          <!--<slide>-->
-            <!--<img class="thumbnail" src="../assets/images/cars/amg-gt-r/mercedes-amg-gt-r_02.jpg" alt="mercedes-amg-gt-r">-->
-          <!--</slide>-->
-          <!--<slide>-->
-            <!--<img class="thumbnail" src="../assets/images/cars/amg-gt-r/mercedes-amg-gt-r_03.jpg" alt="mercedes-amg-gt-r">-->
-          <!--</slide>-->
-          <!--<slide>-->
-            <!--<img class="thumbnail" src="../assets/images/cars/amg-gt-r/mercedes-amg-gt-r_04.jpg" alt="mercedes-amg-gt-r">-->
-          <!--</slide>-->
-          <!--<slide>-->
-            <!--<img class="thumbnail" src="../assets/images/cars/amg-gt-r/mercedes-amg-gt-r_05.jpg" alt="mercedes-amg-gt-r">-->
-          <!--</slide>-->
-          <!--<slide>-->
-            <!--<img class="thumbnail" src="../assets/images/cars/amg-gt-r/mercedes-amg-gt-r_06.jpg" alt="mercedes-amg-gt-r">-->
-          <!--</slide>-->
-          <!--<slide>-->
-            <!--<img class="thumbnail" src="../assets/images/cars/amg-gt-r/mercedes-amg-gt-r_07.jpg" alt="mercedes-amg-gt-r">-->
-          <!--</slide>-->
-          <!--<slide>-->
-            <!--<img class="thumbnail" src="../assets/images/cars/amg-gt-r/mercedes-amg-gt-r_08.jpg" alt="mercedes-amg-gt-r">-->
-          <!--</slide>-->
-        <!--</carousel>-->
-      <!--</div>-->
     </div>
   </div>
 </template>

@@ -22,20 +22,16 @@
         `getActiveModel`
       ]),
     },
-    methods: {
-      handleScroll: function (event) {
-        if (window.scrollY === window.outerHeight) {
-          console.log('a')
-        }
-      }
-    },
-    created: function () {
-      this.windowHeight = window.outerHeight;
-      window.addEventListener('scroll', this.handleScroll);
-    },
-    destroyed: function () {
-      window.removeEventListener('scroll', this.handleScroll);
-    },
+//    methods: {
+//      handleScroll: function (event) {}
+//    },
+//    created: function () {
+//      this.windowHeight = window.outerHeight;
+//      window.addEventListener('scroll', this.handleScroll);
+//    },
+//    destroyed: function () {
+//      window.removeEventListener('scroll', this.handleScroll);
+//    },
     components: {
       CarDetailsImage,
       CarDetailsMainInfo

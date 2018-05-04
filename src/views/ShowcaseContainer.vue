@@ -1,17 +1,7 @@
 <template>
   <div class="showcase fullheight">
-    <!--<button @click="setData()">jksadjkljkldsaas</button>-->
-
     <AppHeader></AppHeader>
-
-      <CarModelList :classes="getData"></CarModelList>
-        <!--<router-link to="/">Home</router-link>-->
-        <!--<router-link :to="{ name: 'car', params: { model: 'mercedes' }}">Car homepage</router-link>-->
-        <!--<router-link to="/car/mercedes/details">Details</router-link>-->
-        <!--<router-link to="/car/mercedes/configuration">Configuration</router-link>-->
-        <!--<router-link to="/test-drive">Test Drive</router-link>-->
-        <!--<button @click="getCarLines()">Get Car Lines</button>-->
-
+    <CarModelList :classes="getData"></CarModelList>
   </div>
 </template>
 

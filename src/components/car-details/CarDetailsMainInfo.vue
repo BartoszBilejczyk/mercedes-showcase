@@ -3,11 +3,11 @@
     <div class="car-details-main-info">
       <transition name="fade" appear mode="out-in">
         <div class="container">
-          <div class="navigation text-center row justify-around align-center copy copy--small semi uppercase">
-            <router-link class="black styled-link styled-link--on-light" :to="{ name: 'car', params: { model: 'mercedes' }}">Close Details</router-link>
-            <router-link class="black styled-link styled-link--on-light" to="/test-drive">Arrange Test Drive</router-link>
-            <p class="black styled-link styled-link--on-light" @click="goToConfiguration">Configure Vehicle</p>
-          </div>
+          <!--<div class="navigation text-center row justify-around align-center copy copy&#45;&#45;small semi uppercase">-->
+            <!--<router-link class="black styled-link styled-link&#45;&#45;on-light" :to="{ name: 'car', params: { model: 'mercedes' }}">Close Details</router-link>-->
+            <!--<router-link class="black styled-link styled-link&#45;&#45;on-light" to="/test-drive">Arrange Test Drive</router-link>-->
+            <!--<p class="black styled-link styled-link&#45;&#45;on-light" @click="goToConfiguration">Configure Vehicle</p>-->
+          <!--</div>-->
 
           <div class="main-info">
             <h1 class="heading heading--primary black">{{ activeModel.name }}</h1>

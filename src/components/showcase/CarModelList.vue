@@ -1,6 +1,6 @@
 <template>
   <div class="align-center fullheight car-model-list">
-    <div v-for="(carClass, index) in classes">
+    <div v-for="(carClass, index) in filteredClasses">
       <CarModel :carClassLink="carClass._links.models" :classId="carClass.classId" :name="carClass.className" :image="carClass.classImage" :carClassindex="index" :key="index"></CarModel>
     </div>
   </div>
@@ -12,9 +12,9 @@
   export default {
     name: 'Car-Model-List',
     props: ['classes'],
-    data() {
-      return {
-//        models: [1,2,3,4,5,6,7,8,9]
+    computed: {
+      filteredClasses() {
+        return this.classes.slice(0, 10);
       }
     },
     components: {
