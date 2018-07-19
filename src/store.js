@@ -50,8 +50,6 @@ export default new Vuex.Store({
   },
   actions: {
     async setData({commit}) {
-      console.log('siema')
-
       commit('SET_LOADING', true)
 
       let classesResponse;

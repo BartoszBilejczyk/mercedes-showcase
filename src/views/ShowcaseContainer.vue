@@ -4,7 +4,7 @@
 
     <AppHeader></AppHeader>
 
-      <CarModelList v-if="!getLoading" :classes="getData"></CarModelList>
+      <CarModelList :classes="getData"></CarModelList>
         <!--<router-link to="/">Home</router-link>-->
         <!--<router-link :to="{ name: 'car', params: { model: 'mercedes' }}">Car homepage</router-link>-->
         <!--<router-link to="/car/mercedes/details">Details</router-link>-->
@@ -25,7 +25,6 @@
     name: 'showcase',
     data () {
       return {
-        carLines: [],
         loading: false
       }
     },
@@ -34,15 +33,6 @@
         `getData`,
         'getLoading'
       ]),
-    },
-    beforeRouteEnter (to, from, next) {
-      next(vm => vm.setData())
-    },
-    // when route changes and this component is already rendered,
-    // the logic will be slightly different.
-    beforeRouteUpdate (to, from, next) {
-      this.setData();
-      next()
     },
     methods: {
       ...mapActions([
@@ -54,19 +44,15 @@
         }
       }
     },
-//    mounted() {
-//      if(!this.$store.state.data.length) {
-//        this.$store.dispatch('setData');
-//      }
-//    },
-//    beforeRouteEnter (to, from, next) {
-//      console.log('a')
-//      return store.dispatch('setData').then(next);
-//    },
-//    beforeRouteUpdate (to, from, next) {
-//      console.log('b')
-//      return this.$store.dispatch('setData').then(next);
-//    },
+   mounted() {
+     this.$store.dispatch('setData');
+   },
+   beforeRouteEnter (to, from, next) {
+     return store.dispatch('setData').then(next);
+   },
+   beforeRouteUpdate (to, from, next) {
+     return this.$store.dispatch('setData').then(next);
+   },
     components: {
       AppHeader,
       CarModelList
