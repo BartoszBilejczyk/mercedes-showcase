@@ -50,6 +50,7 @@ export default new Vuex.Store({
   },
   actions: {
     async setData({commit}) {
+      console.log('siema')
 
       commit('SET_LOADING', true)
 
@@ -59,7 +60,7 @@ export default new Vuex.Store({
       let photoResponse;
 
       try {
-        classesResponse = await axios.get(`http://localhost:9090/https://api.mercedes-benz.com/configurator/v1/markets/pl_PL/classes?apikey=b1435ba6-8cd3-4186-9ab9-871dd4e7ee1e`)
+        classesResponse = await axios.get(`https://api.mercedes-benz.com/configurator/v1/markets/pl_PL/classes?apikey=b1435ba6-8cd3-4186-9ab9-871dd4e7ee1e`)
 
         commit('SET_DATA', classesResponse.data);
 
@@ -69,7 +70,7 @@ export default new Vuex.Store({
 
       for (let i = 0; i <= 3; i++) {
         try {
-          modelsResponse = await axios.get(`http://localhost:9090/${classesResponse.data[i]._links.models}`)
+          modelsResponse = await axios.get(`${classesResponse.data[i]._links.models}`)
 
           commit('SET_MODELS', {
             index: i,
@@ -80,7 +81,7 @@ export default new Vuex.Store({
           return
         }
         try {
-          configurationsResponse = await axios.get(`http://localhost:9090/${modelsResponse.data[0]._links.configurations}`)
+          configurationsResponse = await axios.get(`${modelsResponse.data[0]._links.configurations}`)
 
           commit('SET_MODEL_CONFIGURATIONS', {
             index: i,
@@ -91,7 +92,7 @@ export default new Vuex.Store({
         }
 
         try {
-          photoResponse = await axios.get(`http://localhost:9090/${configurationsResponse.data._links.image}`)
+          photoResponse = await axios.get(`${configurationsResponse.data._links.image}`)
 
           commit('SET_DATA_IMAGES', {
             index: i,
@@ -126,7 +127,7 @@ export default new Vuex.Store({
     //   let imagesResponse;
     //
     //   try {
-    //     classResponse = await axios.get(`http://localhost:9090/https://api.mercedes-benz.com/configurator/v1/markets/pl_PL/models?classId=${data.classId}&apikey=b1435ba6-8cd3-4186-9ab9-871dd4e7ee1e`)
+    //     classResponse = await axios.get(`https://api.mercedes-benz.com/configurator/v1/markets/pl_PL/models?classId=${data.classId}&apikey=b1435ba6-8cd3-4186-9ab9-871dd4e7ee1e`)
     //
     //     commit('SET_MODEL', classResponse.data[0]);
     //
@@ -135,7 +136,7 @@ export default new Vuex.Store({
     //   }
     //
     //   try {
-    //     configurationsResponse = await axios.get(`http://localhost:9090/${classResponse.data[0]._links.configurations}`)
+    //     configurationsResponse = await axios.get(`${classResponse.data[0]._links.configurations}`)
     //
     //     commit('SET_MODEL_DETAILS', configurationsResponse.data);
     //
@@ -144,7 +145,7 @@ export default new Vuex.Store({
     //   }
     //
     //   try {
-    //     imagesResponse = await axios.get(`http://localhost:9090/${configurationsResponse.data._links.image}`)
+    //     imagesResponse = await axios.get(`${configurationsResponse.data._links.image}`)
     //
     //     commit('SET_MODEL_IMAGE', {
     //       interiorImage: imagesResponse.data.vehicle.INT1.url,
